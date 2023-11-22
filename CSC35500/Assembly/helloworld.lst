@@ -1,0 +1,15 @@
+     1                                  	section	.data
+     2 00000000 48656C6C6F2C20576F-     hello:	db "Hello, World!", 0xA
+     2 00000009 726C64210A         
+     3                                  	section	.text	; following is code
+     4                                  	global	_start	; this code contains the global symbol _start
+     5                                  _start:
+     6 00000000 BA0E000000              	mov	edx, 14		;length of string
+     7 00000005 B9[00000000]            	mov	ecx, hello	;this syscall requires ecx to hold address edx is length
+     8 0000000A B804000000              	mov	eax, 4		;eax=4 print string
+     9 0000000F BB01000000              	mov	ebx,1		;parameter for printing string
+    10 00000014 CD80                    	int	0x80
+    11                                  	
+    12 00000016 B801000000              	mov 	eax, 1	; tells linux which sys call to use (1=exit)
+    13 0000001B BB00000000              	mov	ebx, 0	; specifies parameter exit needs
+    14 00000020 CD80                    	int 	0x80
