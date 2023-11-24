@@ -16,7 +16,7 @@ void generate(TreeNode* root, string code, unordered_map<char, string>& map){
     generate(root->_right, code + "1", map);
 }
 
-TreeNode* buildTree(const unordered_map<char, float>& freqmap) {
+/*TreeNode* buildTree(const unordered_map<char, float>& freqmap) {
     priority_queue<TreeNode, vector<TreeNode>, greater<TreeNode>> minHeap;
 
     for (const auto& entry : freqmap) {
@@ -36,6 +36,30 @@ TreeNode* buildTree(const unordered_map<char, float>& freqmap) {
 
         minHeap.push(*node);
     }
+    TreeNode* root = new TreeNode(minHeap.top());
+    return root;
+}*/
+TreeNode* buildTree(const std::unordered_map<char, float>& freqmap) {
+    std::priority_queue<TreeNode*, std::vector<TreeNode*>, TreeNode> minHeap;
 
-    return new TreeNode('\0', minHeap.top().freq);
+    for (const auto& entry : freqmap) {
+        minHeap.push(new TreeNode(entry.first, entry.second));
+    }
+
+    while (minHeap.size() > 1) {
+        TreeNode* left = minHeap.top();
+        minHeap.pop();
+
+        TreeNode* right = minHeap.top();
+        minHeap.pop();
+
+        TreeNode* node = new TreeNode('\0', left->freq + right->freq);
+        node->_left = left;
+        node->_right = right;
+
+        minHeap.push(node);
+    }
+
+    TreeNode* root = minHeap.top();
+    return root;
 }
