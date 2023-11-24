@@ -1,0 +1,7 @@
+Dillon geary
+23 November 2023
+This code generates a huffman code for a given frequency
+table, could be adapted to work for any input by asking user
+for input of frequency or be combined with a function that 
+creates the map from a document to be compressed. However,
+project specifications asked for this specific example.
