@@ -14,6 +14,9 @@ class TreeNode{
         bool operator>(const TreeNode& other) const {
             return freq >other.freq;
         }
+ bool operator()(const TreeNode* lhs, const TreeNode* rhs) const {
+     return lhs->freq > rhs->freq;
+ }
 
 
 }; 
